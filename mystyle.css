@@ -1,0 +1,52 @@
+.card{
+    text-align:center;
+    width:450px;
+	height:400px;
+	background-image: linear-gradient(#fdc830, #F37335) !important;
+	color:white;
+	margin-top:100px;
+	border-radius:10% !important;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 40px 0 rgba(0, 0, 0, 0.19);
+	font-family:Cursive;
+}
+
+
+
+.btn{
+	background-color:white !important;
+	color:black !important;
+	width:180px;
+	height:50px;
+	border-radius:10% 10% 10% 10% !important;
+	border:1px solid #F37335 !important;
+	
+	
+}
+
+.btn:hover{
+	background-color:black !important;
+	border:1px solid #F37335 !important;
+	color:#F37335 !important;
+	   
+}	
+
+#years{
+	font-size:20px;
+	
+	
+	
+}
+
+#months{
+	font-size:20px;
+	
+	
+	
+}
+
+#days{
+	font-size:20px;
+	
+	
+	
+}
