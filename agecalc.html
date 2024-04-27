@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>age calculator</title>
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="mystyle.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+</head>
+
+<body  style="background-image: url('bg7.jpg');">
+    <center>
+  <div class="card" >
+   
+    <div class="row">
+	  <div class="col-lg col-xs">
+	     <h1 style="font-family:Sans-serif; margin-top:30px;">AGE CALCULATOR</h1>
+	  </div>
+	</div>
+	  <br>
+	  <div class="row">
+	    <div class="col-lg col-xs">
+		  <label class="name">Enter Your Date Of Birth:</label><br>
+          <input type="date" class="" id="date-input" ></input>
+		</div>
+	  </div>
+	  <br>
+	  <center><button class="btn "   onclick="ageCalculate()">SUBMIT</button></center><br>
+	  <br>
+	  <div class="row">
+	    <div class="col-lg col-xs">
+		  <div class="row">
+		    <div class="col-lg-4">
+		      <marquee id="years"> </marquee>
+		    </div>
+			<div class="col-lg-4">
+		     <marquee id="months"> </marquee>
+			 </div>
+			 <div class="col-lg-4">
+		      <marquee id="days"> </marquee>
+		     </div>
+		</div>
+	  </div>
+
+ </div>
+	  </center>
+	  
+
+</body>
+
+<script>
+
+const months = [31,28,31,30,31,30,31,31,30,31,30,31];
+
+function ageCalculate(){
+    let today = new Date();
+    let inputDate = new Date(document.getElementById("date-input").value);
+    let birthMonth,birthDate,birthYear;
+    let birthDetails = {
+        date:inputDate.getDate(),
+        month:inputDate.getMonth()+1,
+        year:inputDate.getFullYear()
+    }
+    let currentYear = today.getFullYear();
+    let currentMonth = today.getMonth()+1;
+    let currentDate = today.getDate();
+
+    leapChecker(currentYear);
+
+    if(
+        birthDetails.year > currentYear ||
+        ( birthDetails.month > currentMonth && birthDetails.year == currentYear) || 
+        (birthDetails.date > currentDate && birthDetails.month == currentMonth && birthDetails.year == currentYear)
+    ){
+        alert("Not Born Yet");
+        displayResult("-","-","-");
+        return;
+    }
+
+    birthYear = currentYear - birthDetails.year;
+
+    if(currentMonth >= birthDetails.month){
+        birthMonth = currentMonth - birthDetails.month;
+    }
+    else{
+        birthYear--;
+        birthMonth = 12 + currentMonth - birthDetails.month;
+    }
+
+    if(currentDate >= birthDetails.date){
+        birthDate = currentDate - birthDetails.date;
+    }
+    else{
+        birthMonth--;
+        let days = months[currentMonth - 2];
+        birthDate = days + currentDate - birthDetails.date;
+        if(birthMonth < 0){
+            birthMonth = 11;
+            birthYear--;
+        }
+    }
+    displayResult(birthDate,birthMonth,birthYear);
+}
+
+function displayResult(bDate,bMonth,bYear){
+    document.getElementById("years").textContent = "your age is "+bYear;
+    document.getElementById("months").textContent = "months "+bMonth;
+    document.getElementById("days").textContent = "days "+bDate;
+}
+
+function leapChecker(year){
+    if(year % 4 == 0 || (year % 100 == 0 && year % 400 == 0)){
+        months[1] = 29;
+    }
+    else{
+        months[1] = 28;
+    }
+}
+</script>
+
+</html>
+
